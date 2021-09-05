@@ -1,16 +1,15 @@
 import os
 import smtplib
+import sys
 
 email_address = os.environ.get("user1")
 email_password = os.environ.get("pass1")
-
-#emails file
 
 path = r"C:\Users\merid\Desktop\emails.txt"
 
 with open(path,"r") as file:
     Lines = file.read().splitlines()
-print(Lines)
+print("Sending all emails...")
 
 with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
     smtp.ehlo()
@@ -23,10 +22,13 @@ with smtplib.SMTP("smtp.gmail.com", 587) as smtp:
     body = "You just won 1000 dollars"
     msg = f"Subject: {subject}\n\n{body}"
 
-    for i in Lines :
-        smtp.sendmail(email_address, Lines, msg)
-        file.close()
+    n = 0
+    while True :
+        smtp.sendmail(email_address, Lines[n], msg)
         print("email sent")
-
+        #sys.exit()
+        n += 1
+        if n > 15:
+            sys.exit()
 
 
