@@ -2,6 +2,8 @@ import os
 import smtplib
 from email.message import EmailMessage
 import imghdr
+import time
+
 
 email_address = os.environ.get("user1")
 email_pass = os.environ.get("pass1")
@@ -33,10 +35,11 @@ n = 0
 
 with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp :
     smtp.login(email_address,email_pass)
+
     for email in Lines :
         msg["To"] = email
         smtp.send_message(msg)
         n += 1
         print("email sent number:", n)
         del msg["To"]
-
+        time.sleep(2)
