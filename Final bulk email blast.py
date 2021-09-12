@@ -2,7 +2,6 @@ import os
 import smtplib
 from email.message import EmailMessage
 import imghdr
-import sys
 
 email_address = os.environ.get("user1")
 email_pass = os.environ.get("pass1")
